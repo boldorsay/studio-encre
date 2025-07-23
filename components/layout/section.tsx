@@ -1,22 +1,11 @@
 import React, { ReactNode } from 'react';
-import { cn } from '../../lib/utils';
 
-interface SectionProps extends React.HTMLProps<HTMLElement> {
-  background?: string;
+interface SectionProps {
   children: ReactNode;
 }
 
-export const Section: React.FC<SectionProps> = ({ className, children, background, ...props }) => {
-  return (
-    <div className={background || "bg-default"}>
-      <section
-        className={cn("py-12 mx-auto max-w-7xl px-6", className)}
-        {...props}
-      >
-        {children}
-      </section>
-    </div>
-  );
+export const Section: React.FC<SectionProps> = ({ children }) => {
+  return <>{children}</>;
 };
 
 export const tailwindBackgroundOptions = [

@@ -29,13 +29,13 @@ const TestimonialCard = ({ testimonial }: { testimonial: PageBlocksTestimonialTe
       <CardContent className="grid grid-cols-[auto_1fr] gap-3 pt-6">
         <Avatar className="size-9" data-tina-field={tinaField(testimonial, 'avatar')}>
           {testimonial.avatar && (
-            <AvatarImage alt={testimonial.author!} src={testimonial.avatar} loading="lazy" width="120" height="120" />
+            <AvatarImage alt={testimonial.role!} src={testimonial.avatar} loading="lazy" width="120" height="120" />
           )}
-          <AvatarFallback>{testimonial.author!.split(" ").map((word) => word[0]).join("")}</AvatarFallback>
+          <AvatarFallback>{testimonial.role!.split(" ").map((word) => word[0]).join("")}</AvatarFallback>
         </Avatar>
 
         <div>
-          <h3 className="font-medium" data-tina-field={tinaField(testimonial, 'author')}>{testimonial.author}</h3>
+          <h3 className="font-medium" data-tina-field={tinaField(testimonial, 'role')}>{testimonial.role}</h3>
 
           <span className="text-muted-foreground block text-sm tracking-wide" data-tina-field={tinaField(testimonial, 'role')}>{testimonial.role}</span>
 
@@ -58,7 +58,7 @@ export const testimonialBlockSchema: Template = {
         {
           quote:
             "There are only two hard things in Computer Science: cache invalidation and naming things.",
-          author: "Phil Karlton",
+          role: "Phil Karlton",
         },
       ],
     },
@@ -86,11 +86,11 @@ export const testimonialBlockSchema: Template = {
       ui: {
         defaultItem: {
           quote: "There are only two hard things in Computer Science: cache invalidation and naming things.",
-          author: "Phil Karlton",
+          role: "Phil Karlton",
         },
         itemProps: (item) => {
           return {
-            label: `${item.quote} - ${item.author}`,
+            label: `${item.quote} - ${item.role}`,
           };
         },
       },
@@ -102,11 +102,6 @@ export const testimonialBlockSchema: Template = {
           },
           label: "Quote",
           name: "quote",
-        },
-        {
-          type: "string",
-          label: "Author",
-          name: "author",
         },
         {
           type: "string",

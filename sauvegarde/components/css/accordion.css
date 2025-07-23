@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600&display=swap');
+
+.accordion-section {
+    margin: 20rem 2rem 3rem 2rem;
+    height: 100%;
+    position: relative;
+}
+
+.accordion-layout {
+    display: flex;
+    width: 100%;
+    align-items: flex-start;
+    justify-content: space-between;
+    position: relative;
+}
+
+/* Nouveau style pour le diviseur SVG */
+.accordion-divider {
+    position: relative;
+    bottom: 50%;
+    margin-top: -10rem;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+}
+
+/* Style pour l'image SVG */
+.ruler-svg {
+    width: auto;
+    height: 45rem;
+    object-fit: contain;
+}
+
+.accordion-header-section {
+    flex: 0 0 45%;
+    width: 45%;
+    max-width: 700px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-right: 3%;
+    position: relative;
+    z-index: 2;
+}
+
+.accordion-title {
+    font-family: "Barlow Semi Condensed", sans-serif;
+    font-size: var(--font-size-xlarge);
+    font-weight: 700;
+    text-align: left;
+    color: #000;
+}
+
+.accordion-description {
+    color: #000;
+    font-size: var(--font-size-medium);
+    font-family: 'TWK Lausanne', sans-serif;
+    line-height: 1.7rem;
+    font-weight: 450;
+}
+
+.accordion-container {
+    flex: 0 0 45%;
+    width: 45%;
+    overflow-y: auto;
+    padding-left: 3%;
+    position: relative;
+    z-index: 2;
+}
+
+/* Accordéon */
+.accordion-item {
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.accordion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 0;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    background: none;
+    font-size: var(--font-size-large);
+    font-weight: 450;
+    color: #afafaf;
+    transition: color 0.2s;
+}
+
+.accordion-header:focus,
+.accordion-header:hover {
+    color: gray;
+}
+
+.accordion-icon {
+    font-size: 1.6rem;
+    font-weight: 400;
+    margin-left: 1rem;
+    transition: transform 0.3s;
+}
+
+.accordion-content {
+    color: #000;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.accordion-content.open {
+    max-height: 2000px;
+}
+
+.accordion-content-inner {
+    padding: 0 0 1.2rem 0;
+    line-height: 1.6;
+    color: gray;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .accordion-layout {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .accordion-header-section,
+    .accordion-container {
+        flex: 0 0 100%;
+        width: 100%;
+    }
+
+    /* Masquer le SVG en mode mobile */
+    .accordion-divider {
+        display: none;
+    }
+}
+
+.accordion-section h2 {
+    font-size: clamp(3rem, 8vw, 6rem);
+    margin-bottom: 2rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+}
+
+#Layer_21 path.st0 {
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    fill: #afafaf;
+}

@@ -7,6 +7,13 @@ import { videoBlockSchema } from '@/components/blocks/video';
 import { calloutBlockSchema } from '@/components/blocks/callout';
 import { statsBlockSchema } from '@/components/blocks/stats';
 import { ctaBlockSchema } from '@/components/blocks/call-to-action';
+import { accordionBlocks } from '@/components/blocks/accordion';
+import { bannerPaulBlocks } from '@/components/blocks/BannerPaul';
+import { contactBlocks } from '@/components/blocks/contact';
+import { presentationBlocks } from '@/components/blocks/Presentation';
+import { projectsListBlockSchema } from '@/components/blocks/ProjectsList';
+import { servicesBlock } from '@/components/blocks/Services';
+import { threeSceneBlock } from '@/components/blocks/ThreeScene';
 
 const Page: Collection = {
   label: 'Pages',
@@ -40,6 +47,13 @@ const Page: Collection = {
         contentBlockSchema,
         testimonialBlockSchema,
         videoBlockSchema,
+        accordionBlocks,
+        bannerPaulBlocks,
+        contactBlocks,
+        presentationBlocks,
+        projectsListBlockSchema,
+        servicesBlock,
+        threeSceneBlock
       ],
     },
   ],

@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --section-margin-y: 20rem;
+  --section-margin-x: 15rem;
+
+
+  --font-size-Verysmall: 16px;
+  --font-size-small: 18px;
+  --font-size-small-mobile: 16px;
+  --font-size-medium: 20px;
+  --font-size-medium-mobile: 18px;
+  --font-size-large: 30px;
+  --font-size-large-mobile: 24px;
+  --font-size-xlarge: 60px;
+  --font-size-xlarge-mobile: 32px;
+  /* Ajoute ici toutes tes variables globales */
+}
+
+/* TWK Lausanne Font Declarations */
+@font-face {
+  font-family: 'TWK Lausanne';
+  src: url('/font/TWKLausanne-200.woff2') format('woff2');
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'TWK Lausanne';
+  src: url('/font/TWKLausanne-450.woff2') format('woff2');
+  font-weight: 450;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'TWK Lausanne';
+  src: url('/font/TWKLausanne-500.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'TWK Lausanne';
+  src: url('/font/TWKLausanne-750.woff2') format('woff2');
+  font-weight: 750;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'TWK Lausanne';
+  src: url('/font/TWKLausanne-1000.woff2') format('woff2');
+  font-weight: 1000;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 255, 255, 255;
+    --background-end-rgb: 255, 255, 255;
+  }
+}
+
+body {
+  font-family: 'TWK Lausanne', sans-serif;
+  color: rgb(var(--foreground-rgb));
+
+  background: rgb(252, 249, 245) !important;
+}
+
+canvas {
+  cursor: none;
+}

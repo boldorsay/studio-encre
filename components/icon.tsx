@@ -69,6 +69,10 @@ const iconColorClass: {
     regular: 'text-white opacity-80',
     circle: 'bg-white-400 dark:bg-white-500 text-white-50',
   },
+  primary: {
+    regular: 'text-primary',
+    circle: 'bg-primary text-primary-foreground',
+  },
 };
 
 const iconSizeClass = {
@@ -97,8 +101,10 @@ export const Icon = ({ data, parentColor = '', className = '', tinaField = '' })
   //@ts-ignore
   const iconSizeClasses = typeof size === 'string' ? iconSizeClass[size] : iconSizeClass[Object.keys(iconSizeClass)[size]];
 
-  const iconColor = color ? (color === 'primary' ? theme!.color : color) : theme!.color;
-
+  const iconColor =
+  color === 'primary' || !color
+    ? theme?.color ?? 'white' // ou autre couleur par défaut
+    : color;
   if (style == 'circle') {
     return (
       <div
@@ -109,8 +115,9 @@ export const Icon = ({ data, parentColor = '', className = '', tinaField = '' })
       </div>
     );
   } else {
-    const iconColorClasses =
-      iconColorClass[parentColor === 'primary' && (iconColor === theme!.color || iconColor === 'primary') ? 'white' : iconColor!].regular;
+    const resolvedKey = parentColor === 'primary' && (iconColor === theme?.color || iconColor === 'primary')?'white':iconColor ?? 'primary';
+
+    const iconColorClasses = iconColorClass[resolvedKey]?.regular ?? 'text-grey-400';
     return (
       <IconSVG
         {...(tinaField ? { 'data-tina-field': tinaField } : {})} // only render data-tina-field if it exists
@@ -119,3 +126,5 @@ export const Icon = ({ data, parentColor = '', className = '', tinaField = '' })
     );
   }
 };
+
+

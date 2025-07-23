@@ -42,7 +42,6 @@ export const components: Components<{
       <div>
         <blockquote>
           <TinaMarkdown content={props.children} />
-          {props.authorName}
         </blockquote>
       </div>
     );
