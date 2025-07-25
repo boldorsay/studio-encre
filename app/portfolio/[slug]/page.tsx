@@ -11,11 +11,14 @@ export async function generateStaticParams() {
   );
 }
 
-export default async function Page({ params }: { params: { slug: string } }) {
+export default async function Page({ params }: Props) {
   const { data } = await client.queries.portfolio({ relativePath: params.slug + '.mdx' });
+
   const project = data.portfolio;
   if (!project) return notFound();
+
   const images = (project.images || []).map(img => img?.image).filter(Boolean);
+
   return (
     <PortfolioSlider
       images={images}
