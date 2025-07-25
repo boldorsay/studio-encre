@@ -27,8 +27,7 @@ if ! git push origin main; then
     exit 1
 fi
 
-# Déclenchement Vercel
-echo "⚙️ Déclenchement du déploiement Vercel..."
-curl -X POST https://api.vercel.com/v1/integrations/deploy/prj_bVXbT9RKjdfJJnHvbqXcddH5gIhz/6Dddn9hwqt
-
-echo "✅ Déploiement déclenché avec succès !"
+# # Déclenchement Vercel
+# echo "⚙️ Déclenchement du déploiement Vercel..."
+# curl -X POST https://api.vercel.com/v1/integrations/deploy/prj_bVXbT9RKjdfJJnHvbqXcddH5gIhz/6Dddn9hwqt
+ echo "✅ Déploiement déclenché avec succès !"
