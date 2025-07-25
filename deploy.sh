@@ -29,6 +29,6 @@ fi
 
 # Déclenchement Vercel
 echo "⚙️ Déclenchement du déploiement Vercel..."
-curl -X POST https://api.vercel.com/v1/integrations/deploy/prj_khXkdO17Q9CJMpCpagUR2tsUTCsv/MzhshRrKjG
+curl -X POST https://api.vercel.com/v1/integrations/deploy/prj_bVXbT9RKjdfJJnHvbqXcddH5gIhz/6Dddn9hwqt
 
 echo "✅ Déploiement déclenché avec succès !"
