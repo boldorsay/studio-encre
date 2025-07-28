@@ -21,12 +21,16 @@ export const ProjectsList = () => {
     async function fetchProjects() {
       try {
         const { data } = await client.queries.portfolioConnection();
-        const items = data.portfolioConnection.edges.map(({ node }) => ({
-          title: node.title,
-          client: node.client,
-          date: node.date,
-          id: node._sys.filename,
-        }));
+        const items = (data?.portfolioConnection?.edges ?? []).flatMap(edge => {
+          const node = edge?.node;
+          if (!node) return [];
+          return [{
+        title: node.title ?? "",
+        client: node.client ?? "",
+        date: node.date ?? "",
+        // ajoute ici les champs dont tu as besoin (slug, _sys, etc.)
+      }];
+    });        
         setProjects(items);
       } finally {
         setLoading(false);
