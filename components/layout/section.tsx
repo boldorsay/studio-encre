@@ -1,11 +1,34 @@
 import React, { ReactNode } from 'react';
 
+
+
 interface SectionProps {
   children: ReactNode;
+  /** classe Tailwind pour le fond, ex: "bg-white/80" */
+  background?: string;
+  /** classes supplémentaires si besoin */
+  className?: string;
+  /** styles inline éventuellement */
+  style?: CSSProperties;
 }
 
-export const Section: React.FC<SectionProps> = ({ children }) => {
-  return <>{children}</>;
+/**
+ * Rendu d'une vraie balise <section> avec la classe de background.
+ * On fusionne background + className proprement.
+ */
+export const Section: React.FC<SectionProps> = ({
+  children,
+  background,
+  className,
+  style,
+  ...rest
+}) => {
+  const classes = [background, className].filter(Boolean).join(' ');
+  return (
+    <section className={classes} style={style} {...rest}>
+      {children}
+    </section>
+  );
 };
 
 export const tailwindBackgroundOptions = [
