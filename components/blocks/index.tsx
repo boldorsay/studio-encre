@@ -50,17 +50,17 @@ const Block = (block: PageBlocks & { i?: number }) => {
     case "PageBlocksCta":
       return <CallToAction data={block} />;
     case "PageBlocksAccordion":
-      return <Accordion data={block} />
+      return <Accordion data={block as any} />
     case "PageBlocksBanner" :
-       return <BannerPaul data={block} />
+       return <BannerPaul data={block as any} />
        case "PageBlocksContactLinks":
   return <Contact data={block} />
   case "PageBlocksPresentation":
-    return <Presentation data={block} tinaFieldBase={`page.blocks.${block.i}`} />
+    return <Presentation data={block as any} tinaFieldBase={`page.blocks.${block.i}`} />
     case "PageBlocksProjectsList":
-      return <ProjectsList data={block} />;
+      return <ProjectsList  />;
     case "PageBlocksServices":
-      return <ServicesBlock data={block} />;
+      return <ServicesBlock data={block as any} />;
     case "PageBlocksThreeScene":
       return <ThreeSceneBlock />;
     default:
