@@ -2,6 +2,7 @@ import Link from "next/link";
 import { tinaField } from "tinacms/dist/react";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
 import '../css/contact.css';
+import { Template } from "tinacms";
 
 type ContactLink = {
   linkText?: string | null;
