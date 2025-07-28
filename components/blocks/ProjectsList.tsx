@@ -102,8 +102,7 @@ export const projectsListBlockSchema = {
       name: 'projects',
       list: true,
       ui: {
-        itemProps: (item) => ({ label: item?.title }),
-        defaultItem: {
+        itemProps: (item: ProjectItem) => ({ label: item?.title ?? "Projet" }),        defaultItem: {
           title: 'Projet',
           client: 'Client',
           date: '2023-01-01',
