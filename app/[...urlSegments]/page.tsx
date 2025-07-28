@@ -1,7 +1,6 @@
 import React from 'react';
 import { notFound } from 'next/navigation';
 import client from '@/tina/__generated__/client';
-import { Section } from '@/components/layout/section';
 import ClientPage from './client-page';
 
 export const revalidate = 300;
@@ -23,11 +22,7 @@ export default async function Page({
     notFound();
   }
 
-  return (
-    <Section>
-      <ClientPage {...data} />
-    </Section>
-  );
+  return <ClientPage {...data} />;
 }
 
 export async function generateStaticParams() {

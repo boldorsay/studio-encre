@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
 import { tinaField } from 'tinacms/dist/react';
 import Link from 'next/link';
-import { Section } from '../layout/section';
 import "../css/projects.css";
-// @ts-ignore
+import { Template } from 'tinacms';
 import { client } from '../../tina/__generated__/client';
 
 export type ProjectItem = {
@@ -43,34 +42,32 @@ export const ProjectsList = () => {
   if (!projects.length) return <div>Aucun projet à afficher.</div>;
 
   return (
-    <Section>
-      <div className="projects-section">
-        <h2 className="projects-title">Projets de Portfolio</h2>
-        <div className="projects-list">
-          {projects.map((project, index) => {
-            const filename = project.id || `project-${index}`;
-            return (
-              <Link
-                href={`/portfolio/${filename}`}
-                key={index}
-                className="project-item"
-              >
-                <div className="project-item-content">
-                  <span className="project-item-number">{(index + 1).toString().padStart(2, '0')}</span>
-                  <span className="project-item-title">{project.title || 'Sans titre'}</span>
-                  <span className="project-item-client">{project.client || 'Client non spécifié'}</span>
-                  <span className="project-item-date">{project.date ? new Date(project.date).getFullYear() : ''}</span>
-                </div>
-              </Link>
-            );
-          })}
-        </div>
+    <div className="projects-section">
+      <h2 className="projects-title">Projets de Portfolio</h2>
+      <div className="projects-list">
+        {projects.map((project, index) => {
+          const filename = project.id || `project-${index}`;
+          return (
+            <Link
+              href={`/portfolio/${filename}`}
+              key={index}
+              className="project-item"
+            >
+              <div className="project-item-content">
+                <span className="project-item-number">{(index + 1).toString().padStart(2, '0')}</span>
+                <span className="project-item-title">{project.title || 'Sans titre'}</span>
+                <span className="project-item-client">{project.client || 'Client non spécifié'}</span>
+                <span className="project-item-date">{project.date ? new Date(project.date).getFullYear() : ''}</span>
+              </div>
+            </Link>
+          );
+        })}
       </div>
-    </Section>
+    </div>
   );
 };
 
-export const projectsListBlockSchema = {
+export const projectsListBlockSchema: Template = {
   name: 'projectsList',
   label: 'Liste de Projets',
   ui: {

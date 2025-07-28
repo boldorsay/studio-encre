@@ -1,12 +1,5 @@
 import type { Collection } from 'tinacms';
-import { heroBlockSchema } from '@/components/blocks/hero';
-import { contentBlockSchema } from '@/components/blocks/content';
-import { testimonialBlockSchema } from '@/components/blocks/testimonial';
-import { featureBlockSchema } from '@/components/blocks/features';
-import { videoBlockSchema } from '@/components/blocks/video';
-import { calloutBlockSchema } from '@/components/blocks/callout';
-import { statsBlockSchema } from '@/components/blocks/stats';
-import { ctaBlockSchema } from '@/components/blocks/call-to-action';
+
 import { accordionBlocks } from '@/components/blocks/accordion';
 import { bannerPaulBlocks } from '@/components/blocks/BannerPaul';
 import { contactBlocks } from '@/components/blocks/contact';
@@ -39,14 +32,6 @@ const Page: Collection = {
         visualSelector: true,
       },
       templates: [
-        heroBlockSchema,
-        calloutBlockSchema,
-        featureBlockSchema,
-        statsBlockSchema,
-        ctaBlockSchema,
-        contentBlockSchema,
-        testimonialBlockSchema,
-        videoBlockSchema,
         accordionBlocks,
         bannerPaulBlocks,
         contactBlocks,
