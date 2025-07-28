@@ -9,30 +9,32 @@ export async function generateStaticParams() {
     data.portfolioConnection.edges
       ?.filter((edge): edge is NonNullable<typeof edge> => !!edge?.node?._sys.filename)
       .map((edge) => ({
-        slug: edge.node._sys.filename,
+        slug: edge.node!._sys.filename,
       })) || []
   );
 }
 
-export default async function Page({ params }: { params: { slug: string } }) {
+export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  
   const { data } = await client.queries.portfolio({
-    relativePath: `${params.slug}.mdx`,
+    relativePath: `${slug}.mdx`,
   });
 
   const project = data.portfolio;
   if (!project) return notFound();
 
   const images = (project.images || [])
-    .map((img) => img?.image)
-    .filter(Boolean);
+  .map((img) => img?.image)
+  .filter((img): img is string => typeof img === 'string');
 
   return (
-    <PortfolioSlider
-      images={images}
-      title={project.title}
-      client={project.client}
-      description={project.body}
-      date={project.date}
-    />
+<PortfolioSlider
+  images={images}
+  title={project.title ?? ''}
+  client={project.client ?? ''}
+  description={project.body ?? ''}
+  date={project.date ?? ''}
+/>
   );
 }

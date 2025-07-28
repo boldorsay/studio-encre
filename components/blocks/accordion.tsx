@@ -6,8 +6,10 @@ import type { Template } from 'tinacms';
 import "../css/accordion.css";
 import Image from "next/image";
 import Ruler from './Ruler';
+import type { Field } from "tinacms";
 
-interface AccordionItemProps {
+
+interface AccordionItemProps extends Record<string, unknown> {
     title: string;
     content: any;
     image?: string;
@@ -48,7 +50,11 @@ function AccordionItem({ title, content, image, isOpen, onClick, itemField, imag
 
 // Nouvelle interface qui correspond au pattern des autres blocs
 type AccordionProps = {
-    data: AccordionItemProps[]; // 
+    data: {
+        title: string;
+        introText: string;
+        items: AccordionItemProps[];
+    }
 }
 
 export const Accordion = ({ data }: AccordionProps) => {
@@ -101,7 +107,7 @@ export const Accordion = ({ data }: AccordionProps) => {
                         {sectionTitle || "Services"}
                     </h2>
                     <div className="accordion-description" data-tina-field={tinaField(data, "introText")}>
-                        <TinaMarkdown content={sectionIntro || ""} />
+                        <TinaMarkdown content={sectionIntro as any} />
                     </div>
                 </div>
 
@@ -139,7 +145,6 @@ export const Accordion = ({ data }: AccordionProps) => {
 export const accordionBlocks: Template = {
     name: "accordion",
     label: "Accordéon",
-    type: "object",
     fields: [
         {
             name: "title",
