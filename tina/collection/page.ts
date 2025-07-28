@@ -56,6 +56,14 @@ const Page: Collection = {
         threeSceneBlock
       ],
     },
+    {
+      name: 'dev_note',
+      label: 'Dev Note',
+      type: 'string',
+      ui: {
+        component: () => null,
+      },
+    },
   ],
 };
 
