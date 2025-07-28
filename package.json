@@ -11,6 +11,9 @@
     "lint": "biome lint",
     "dev:build": "next build"
   },
+  "engines": {
+    "node": "22.x"
+  },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
     "@svgr/webpack": "^8.1.0",
@@ -55,4 +58,5 @@
     "usehooks-ts": "^3.1.1",
     "vercel": "^44.6.4"
   }
+  
 }
