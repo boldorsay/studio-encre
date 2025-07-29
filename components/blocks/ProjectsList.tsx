@@ -1,32 +1,18 @@
+// components/blocks/ProjectsList.tsx
 import { useEffect, useState } from 'react';
-import { tinaField } from 'tinacms/dist/react';
 import Link from 'next/link';
 import "../css/projects.css";
-import { Template } from 'tinacms';
 import { client } from '../../tina/__generated__/client';
+import { Template } from 'tinacms';
 
 export type ProjectItem = {
   title?: string;
   client?: string;
   date?: string;
-  id?: string;
+  id?: string; // slug = _sys.filename
 };
 
-type PortfolioConnectionResponse = {
-  portfolioConnection: {
-    edges: Array<{
-      node: {
-        title?: string;
-        client?: string;
-        date?: string;
-        _sys: {
-          filename?: string;
-          relativePath?: string;
-        };
-      } | null;
-    } | null>;
-  };
-};
+
 
 export const ProjectsList = () => {
   const [projects, setProjects] = useState<ProjectItem[]>([]);
@@ -35,17 +21,23 @@ export const ProjectsList = () => {
   useEffect(() => {
     async function fetchProjects() {
       try {
-        const { data } = await client.queries.portfolioConnection() as { data: PortfolioConnectionResponse };
-        const items = (data?.portfolioConnection?.edges ?? []).flatMap(edge => {
-          const node = edge?.node;
-          if (!node) return [];
-          return [{
-            title: node.title ?? "",
-            client: node.client ?? "",
-            date: node.date ?? "",
-            id: node?._sys?.filename ?? node?._sys?.relativePath?.replace(/\.(md|mdx)$/, '') ?? undefined,
-          }];
-        });
+        const { data } = await client.queries.portfolioConnection();
+        const items =
+          (data?.portfolioConnection?.edges ?? [])
+            .flatMap(edge => {
+              const node = edge?.node;
+              if (!node) return [];
+              return [{
+                title: node.title ?? "",
+                client: node.client ?? "",
+                date: node.date ?? "",
+                // on fabrique un vrai slug à partir du fichier
+                id:
+                  node?._sys?.filename ??
+                  node?._sys?.relativePath?.replace(/\.(md|mdx)$/, '') ??
+                  undefined,
+              }];
+            });
         setProjects(items);
       } finally {
         setLoading(false);
@@ -59,85 +51,47 @@ export const ProjectsList = () => {
 
   return (
     <div className="projects-section">
-      <h2 className="projects-title">Projets de Portfolio</h2>
+    <h2 className="projects-title">Projets de Portfolio</h2>
       <div className="projects-list">
-      {projects.map((project, index) => {
-  if (!project.id) return null; // pas de slug -> pas de lien
-  return (
-    <Link href={`/portfolio/${project.id}`} key={project.id} className="project-item">
-      <div className="project-item-content">
-        <span className="project-item-number">{(index + 1).toString().padStart(2, '0')}</span>
-        <span className="project-item-title">{project.title || 'Sans titre'}</span>
-        <span className="project-item-client">{project.client || 'Client non spécifié'}</span>
-        <span className="project-item-date">
-          {project.date ? new Date(project.date).getFullYear() : ''}
-        </span>
-      </div>
-    </Link>
-  );
-})}
+        {projects.map((project, index) => {
+          if (!project.id) return null; // pas de slug → pas de lien
+          return (
+            <Link
+              href={`/portfolio/${project.id}`}
+              key={project.id}
+              className="project-item"
+            >
+              <div className="project-item-content">
+                <span className="project-item-number">{(index + 1).toString().padStart(2, '0')}</span>
+                <span className="project-item-title">{project.title || 'Sans titre'}</span>
+                <span className="project-item-client">{project.client || 'Client non spécifié'}</span>
+                <span className="project-item-date">
+                  {project.date ? new Date(project.date).getFullYear() : ''}
+                </span>
+              </div>
+            </Link>
+          );
+        })}
       </div>
     </div>
   );
 };
 
+/** Bloc Tina minimal : visible dans l’admin, sans champ éditable */
 export const projectsListBlockSchema: Template = {
   name: 'projectsList',
-  label: 'Liste de Projets',
+  label: 'Liste des Projets',
   ui: {
-    previewSrc: '/blocks/features.png',
-    defaultItem: {
-      title: 'Projets de Portfolio',
-      description: 'Découvrez nos réalisations',
-      projects: [
-        { title: 'Projet 1', client: 'Client A', date: '2023-01-01', id: 'projet-1' },
-        { title: 'Projet 2', client: 'Client B', date: '2022-06-15', id: 'projet-2' },
-      ],
-    },
+    itemProps: () => ({ label: 'Liste des Projets' }),
+    defaultItem: {},
   },
   fields: [
     {
-      type: 'string',
-      label: 'Titre',
-      name: 'title',
-    },
-    {
-      type: 'string',
-      label: 'Description',
-      name: 'description',
-      ui: { component: 'textarea' },
-    },
-    {
-      type: 'object',
-      label: 'Projets',
-      name: 'projects',
-      list: true,
-      ui: {
-        itemProps: (item: ProjectItem) => ({ label: item?.title ?? "Projet" }),        defaultItem: {
-          title: 'Projet',
-          client: 'Client',
-          date: '2023-01-01',
-          id: 'projet',
-        },
-      },
-      fields: [
-        { type: 'string', label: 'Titre', name: 'title' },
-        { type: 'string', label: 'Client', name: 'client' },
-        { type: 'datetime', label: 'Date', name: 'date' },
-        { type: 'string', label: 'ID (slug)', name: 'id' },
-      ],
-    },
-    {
-      type: 'string',
-      label: 'Background',
-      name: 'background',
-      options: [
-        { label: 'Default', value: 'default' },
-        { label: 'Tint', value: 'tint' },
-        { label: 'Primary', value: 'primary' },
-      ],
+      type: 'boolean',
+      name: 'placeholder',     // <- champ factice
+      label: 'Placeholder',
+      required: false,
+      ui: { component: 'hidden' } // <- caché dans le Studio
     },
   ],
-}; 
-
-
+} as const;

@@ -1,9 +1,8 @@
 // app/portfolio/[slug]/page.tsx
 import { notFound } from 'next/navigation';
 import { client } from '@/tina/__generated__/client';
-import ImageSlider from '@/components/blocks/ImageSlider'; // ✅ import default
+import ImageSlider from '@/components/blocks/ImageSlider'; // <- export default
 
-// ➜ Retourner la liste des slugs existants
 export async function generateStaticParams() {
   const { data } = await client.queries.portfolioConnection();
   const slugs =
@@ -13,25 +12,28 @@ export async function generateStaticParams() {
   return slugs.map(slug => ({ slug }));
 }
 
-// ➜ Pas de Promise ici ; Next te passe directement { params: { slug } }
-export default async function Page({ params }: { params: { slug: string } }) {
-  const relativePath = `${params.slug}.mdx`;
+// Typage simple et robuste : pas de Promise, et on lit slug en sécurité
+export default async function Page(props: any) {
+  const slug = props?.params?.slug as string | undefined;
+  if (!slug) return notFound();
 
   try {
-    const { data } = await client.queries.portfolio({ relativePath });
-    const project = data.portfolio;
+    const { data } = await client.queries.portfolio({
+      relativePath: `${slug}.mdx`,
+    });
+    const project = data?.portfolio;
     if (!project) return notFound();
 
-    const images = (project.images || [])
-      .map(img => img?.image)
-      .filter((img): img is string => typeof img === 'string' && img.length > 0);
+    const images = (project.images ?? [])
+      .map(i => i?.image)
+      .filter((s): s is string => !!s);
 
     return (
       <ImageSlider
         images={images}
         title={project.title ?? ''}
         client={project.client ?? ''}
-        description={project.body ?? ''} // adapte si "body" est du rich-text
+        description={project.body ?? ''}
         date={project.date ?? ''}
       />
     );

@@ -4,9 +4,9 @@ import { accordionBlocks } from '@/components/blocks/accordion';
 import { bannerPaulBlocks } from '@/components/blocks/BannerPaul';
 import { contactBlocks } from '@/components/blocks/contact';
 import { presentationBlocks } from '@/components/blocks/Presentation';
-import { projectsListBlockSchema } from '@/components/blocks/ProjectsList';
 import { servicesBlock } from '@/components/blocks/Services';
 import { threeSceneBlock } from '@/components/blocks/ThreeScene';
+import { projectsListBlockSchema } from '@/components/blocks/ProjectsList';
 
 const Page: Collection = {
   label: 'Pages',
@@ -36,9 +36,9 @@ const Page: Collection = {
         bannerPaulBlocks,
         contactBlocks,
         presentationBlocks,
-        projectsListBlockSchema,
         servicesBlock,
-        threeSceneBlock
+        threeSceneBlock,
+        projectsListBlockSchema,
       ],
     },
     {
