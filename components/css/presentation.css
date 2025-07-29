@@ -41,6 +41,10 @@
     margin-right: 1.5%;
 }
 
+.presentation-text p {
+    margin: 0;
+}
+
 @media (max-width: 768px) {
 
     .presentation-container,

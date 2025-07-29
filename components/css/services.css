@@ -34,7 +34,7 @@
     flex-wrap: nowrap;
     position: relative;
     min-height: 500px;
-    border-top: 0.001rem solid #000000;
+    border-top: 0.13rem solid #000000;
 }
 
 /* Appliquer une marge négative plus importante pour le chevauchement */
@@ -75,6 +75,11 @@
     position: relative;
     z-index: 2;
     min-height: calc(500px - 6rem);
+    font-size: var(--font-size-large);
+    color: #000;
+    font-family: 'TWK Lausanne', sans-serif;
+    font-weight: 450;
+    line-height: 1.7rem;
     /* Hauteur minimale moins le chevauchement */
 }
 
@@ -100,9 +105,11 @@
 
 .service-description {
     font-size: var(--font-size-medium);
-    font-family: "Lausanne", sans-serif;
-    font-weight: 600;
+    font-family: 'TWK Lausanne', sans-serif;
+
     color: rgb(23, 25, 27);
+    font-weight: 450;
+    line-height: 1.7rem;
 }
 
 

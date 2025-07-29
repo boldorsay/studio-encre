@@ -9,20 +9,16 @@
 
   --font-size-Verysmall: 16px;
   --font-size-small: 18px;
-  --font-size-small-mobile: 16px;
   --font-size-medium: 20px;
-  --font-size-medium-mobile: 18px;
   --font-size-large: 30px;
-  --font-size-large-mobile: 24px;
   --font-size-xlarge: 60px;
-  --font-size-xlarge-mobile: 32px;
   /* Ajoute ici toutes tes variables globales */
 }
 
 /* TWK Lausanne Font Declarations */
 @font-face {
   font-family: 'TWK Lausanne';
-  src: url('/font/TWKLausanne-200.woff2') format('woff2');
+  src: url('../../public/font/TWKLausanne-200.woff2') format('woff2');
   font-weight: 200;
   font-style: normal;
   font-display: swap;
@@ -30,7 +26,7 @@
 
 @font-face {
   font-family: 'TWK Lausanne';
-  src: url('/font/TWKLausanne-450.woff2') format('woff2');
+  src: url('../../public/font/TWKLausanne-450.woff2') format('woff2');
   font-weight: 450;
   font-style: normal;
   font-display: swap;
@@ -38,7 +34,7 @@
 
 @font-face {
   font-family: 'TWK Lausanne';
-  src: url('/font/TWKLausanne-500.woff2') format('woff2');
+  src: url('../../public/font/TWKLausanne-500.woff2') format('woff2');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -46,7 +42,7 @@
 
 @font-face {
   font-family: 'TWK Lausanne';
-  src: url('/font/TWKLausanne-750.woff2') format('woff2');
+  src: url('../../public/font/TWKLausanne-750.woff2') format('woff2');
   font-weight: 750;
   font-style: normal;
   font-display: swap;
@@ -54,7 +50,7 @@
 
 @font-face {
   font-family: 'TWK Lausanne';
-  src: url('/font/TWKLausanne-1000.woff2') format('woff2');
+  src: url('../../public/font/TWKLausanne-1000.woff2') format('woff2');
   font-weight: 1000;
   font-style: normal;
   font-display: swap;
@@ -78,10 +74,15 @@
 body {
   font-family: 'TWK Lausanne', sans-serif;
   color: rgb(var(--foreground-rgb));
-
-  background: rgb(158, 101, 28) !important;
+  margin: 0;
+  overflow-x: hidden;
+  background: rgb(252, 249, 245);
 }
 
 canvas {
   cursor: none;
+}
+
+p {
+  margin: 0;
 }

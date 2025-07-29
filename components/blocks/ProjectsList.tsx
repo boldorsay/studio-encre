@@ -12,6 +12,22 @@ export type ProjectItem = {
   id?: string;
 };
 
+type PortfolioConnectionResponse = {
+  portfolioConnection: {
+    edges: Array<{
+      node: {
+        title?: string;
+        client?: string;
+        date?: string;
+        _sys: {
+          filename?: string;
+          relativePath?: string;
+        };
+      } | null;
+    } | null>;
+  };
+};
+
 export const ProjectsList = () => {
   const [projects, setProjects] = useState<ProjectItem[]>([]);
   const [loading, setLoading] = useState(true);
@@ -19,17 +35,17 @@ export const ProjectsList = () => {
   useEffect(() => {
     async function fetchProjects() {
       try {
-        const { data } = await client.queries.portfolioConnection();
+        const { data } = await client.queries.portfolioConnection() as { data: PortfolioConnectionResponse };
         const items = (data?.portfolioConnection?.edges ?? []).flatMap(edge => {
           const node = edge?.node;
           if (!node) return [];
           return [{
-        title: node.title ?? "",
-        client: node.client ?? "",
-        date: node.date ?? "",
-        // ajoute ici les champs dont tu as besoin (slug, _sys, etc.)
-      }];
-    });        
+            title: node.title ?? "",
+            client: node.client ?? "",
+            date: node.date ?? "",
+            id: node?._sys?.filename ?? node?._sys?.relativePath?.replace(/\.(md|mdx)$/, '') ?? undefined,
+          }];
+        });
         setProjects(items);
       } finally {
         setLoading(false);
@@ -45,23 +61,21 @@ export const ProjectsList = () => {
     <div className="projects-section">
       <h2 className="projects-title">Projets de Portfolio</h2>
       <div className="projects-list">
-        {projects.map((project, index) => {
-          const filename = project.id || `project-${index}`;
-          return (
-            <Link
-              href={`/portfolio/${filename}`}
-              key={index}
-              className="project-item"
-            >
-              <div className="project-item-content">
-                <span className="project-item-number">{(index + 1).toString().padStart(2, '0')}</span>
-                <span className="project-item-title">{project.title || 'Sans titre'}</span>
-                <span className="project-item-client">{project.client || 'Client non spécifié'}</span>
-                <span className="project-item-date">{project.date ? new Date(project.date).getFullYear() : ''}</span>
-              </div>
-            </Link>
-          );
-        })}
+      {projects.map((project, index) => {
+  if (!project.id) return null; // pas de slug -> pas de lien
+  return (
+    <Link href={`/portfolio/${project.id}`} key={project.id} className="project-item">
+      <div className="project-item-content">
+        <span className="project-item-number">{(index + 1).toString().padStart(2, '0')}</span>
+        <span className="project-item-title">{project.title || 'Sans titre'}</span>
+        <span className="project-item-client">{project.client || 'Client non spécifié'}</span>
+        <span className="project-item-date">
+          {project.date ? new Date(project.date).getFullYear() : ''}
+        </span>
+      </div>
+    </Link>
+  );
+})}
       </div>
     </div>
   );
@@ -125,3 +139,5 @@ export const projectsListBlockSchema: Template = {
     },
   ],
 }; 
+
+
