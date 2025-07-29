@@ -2,7 +2,6 @@
 
 import React from "react";
 import Link from "next/link";
-import { Icon } from "../../icon";
 import { Menu, X } from "lucide-react";
 
 export const Header = () => {
@@ -19,14 +18,6 @@ export const Header = () => {
                 href="/"
                 aria-label="home"
                 className="flex items-center space-x-2">
-                <Icon
-                  parentColor="default"
-                  data={{
-                    name: "Tina",
-                    color: "orange",
-                    style: "float",
-                  }}
-                />{" "}
                 <span>
                   Tina Starter
                 </span>
