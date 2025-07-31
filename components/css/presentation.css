@@ -1,5 +1,3 @@
-.presentation-section {}
-
 .presentation-container {
     display: flex;
     align-items: stretch;
@@ -71,12 +69,13 @@
         font-size: 4vw;
     }
 
-}
+    .presentation-section h2 {
+        font-size: clamp(3rem, 8vw, 6rem);
+        margin-bottom: 2rem;
+        font-weight: 700;
+        line-height: 1;
+        color: #000;
 
-.presentation-section h2 {
-    font-size: clamp(3rem, 8vw, 6rem);
-    margin-bottom: 2rem;
-    font-weight: 700;
-    line-height: 1;
-    color: #000;
+    }
+
 }
