@@ -16,8 +16,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <title>Your App Title</title>
+        <title>Studio encré</title>
         <meta name="description" content="Your app description" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         {/* Add other head elements here */}
       </head>
       <body>
