@@ -15,6 +15,16 @@
   /* Ajoute ici toutes tes variables globales */
 }
 
+@media (max-width: 768px) {
+  :root {
+    --font-size-Verysmall: 14px;
+    --font-size-small: 16px;
+    --font-size-medium: 18px;
+    --font-size-large: 24px;
+    --font-size-xlarge: 48px;
+  }
+}
+
 /* TWK Lausanne Font Declarations */
 @font-face {
   font-family: 'TWK Lausanne';
