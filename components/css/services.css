@@ -144,7 +144,6 @@
 
     .services-section-wrapper {
         padding-top: 4rem;
-        padding-bottom: 4rem;
     }
 
     .service-card {
@@ -182,7 +181,8 @@
     }
 
     .service-description {
-        font-size: 3.5vw;
+        font-size: var(--font-size-medium);
+        margin-bottom: 4rem;
     }
 
     .service-card:not(:first-child) {

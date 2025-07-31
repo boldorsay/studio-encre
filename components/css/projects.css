@@ -98,6 +98,8 @@
             "number title"
             "client date";
         gap: 0.5rem;
+        font-size: var(--font-size-small);
+
     }
 
     .project-item {
@@ -127,4 +129,41 @@
     .project-item-arrow {
         display: none;
     }
+
+    .project-item-title,
+    .project-item-client,
+    .project-item-date {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        min-width: 0;
+        /* crucial en CSS Grid pour éviter que le contenu force la largeur */
+    }
+
+    .project-item-content {
+        grid-template-areas: none;
+        /* ← on reset */
+        grid-template-columns: 28px 1fr 1fr auto;
+        /* 1 seule rangée */
+        column-gap: 0.5rem;
+    }
+
+    /* On enlève les zones imposées */
+    .project-item-number,
+    .project-item-title,
+    .project-item-client,
+    .project-item-date {
+        grid-area: auto;
+    }
+
+
+    .project-item-content {
+        display: grid;
+        grid-template-columns: 28px 64fr 78fr 9fr;
+        white-space: nowrap;
+        align-items: center;
+        width: 100%;
+        font-size: var(--font-size-small);
+    }
+
 }
