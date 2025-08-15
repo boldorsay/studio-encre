@@ -66,7 +66,14 @@ export const ProjectsList = () => {
                 <span className="project-item-title">{project.title || 'Sans titre'}</span>
                 <span className="project-item-client">{project.client || 'Client non spécifié'}</span>
                 <span className="project-item-date">
-                  {project.date ? new Date(project.date).getFullYear() : ''}
+                  {project.date ? (() => {
+                    try {
+                      const date = new Date(project.date);
+                      return isNaN(date.getTime()) ? '' : date.getFullYear().toString();
+                    } catch {
+                      return '';
+                    }
+                  })() : ''}
                 </span>
               </div>
             </Link>

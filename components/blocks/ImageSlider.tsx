@@ -75,7 +75,16 @@ export default function ImageSlider({ images, title, client, description, date }
                         </div>
                         <div className="credits-date">
                             <span className="credits-label">DATE</span>
-                            <div>{date}</div>
+                            <div>
+                                {date ? (() => {
+                                    try {
+                                        const dateObj = new Date(date);
+                                        return isNaN(dateObj.getTime()) ? date : dateObj.getFullYear().toString();
+                                    } catch {
+                                        return date;
+                                    }
+                                })() : ''}
+                            </div>
                         </div>
                     </div>
                 </div>
