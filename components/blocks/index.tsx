@@ -31,7 +31,7 @@ const Block = (block: PageBlocks & { i?: number }) => {
     case "PageBlocksBanner" :
        return <BannerPaul data={block as any} />
        case "PageBlocksContactLinks":
-  return <Contact data={block} />
+  return <Contact data={block} id={block.id || "contact"} />
   case "PageBlocksPresentation":
     return <Presentation data={block as any} tinaFieldBase={`page.blocks.${block.i}`} />
     case "PageBlocksProjectsList":

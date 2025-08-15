@@ -40,12 +40,24 @@ export const BannerPaul: React.FC<BannerProps> = ({ data }) => {
 
             {/* Contenu principal */}
             <div className="banner-center">
-            {items.map((item, index) => (
+            {items.map((item, index) => {
+                // Toujours utiliser des liens, mais avec des href appropriés
+                return (
                     <a
                         key={item.title || index}
                         href={item.link || "#"}
                         className="banner-item"
-                        onClick={(e) => handleClick(e, item.link)}
+                        onClick={(e) => {
+                            // Empêcher la navigation si pas de lien valide
+                            if (!item.link || item.link === "#" || item.link === "") {
+                                e.preventDefault();
+                                return;
+                            }
+                            handleClick(e, item.link);
+                        }}
+                        style={{ 
+                            cursor: (!item.link || item.link === "#" || item.link === "") ? 'default' : 'pointer' 
+                        }}
                     >
                         <div className="banner-title">
                             {item.title}
@@ -54,7 +66,8 @@ export const BannerPaul: React.FC<BannerProps> = ({ data }) => {
                             {item.subtitle}
                         </div>
                     </a>
-                ))}
+                );
+            })}
             </div>
 
             {/* Bouton de défilement à droite */}

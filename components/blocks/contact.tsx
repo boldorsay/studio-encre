@@ -29,11 +29,23 @@ export const Contact: React.FC<ContactProps> = ({ data, tinaFieldBase, id }) => 
   // Helper pour href
   const getContactHref = (url: string | undefined | null): string => {
     if (!url) return '#';
+    
+    // Si l'URL commence déjà par tel: ou mailto:, la retourner telle quelle
+    if (url.startsWith('tel:') || url.startsWith('mailto:')) {
+      return url;
+    }
+    
+    // Sinon, appliquer la logique de transformation
     if (url.includes('@')) return `mailto:${url}`;
     const cleanedUrl = url.replace(/[\s-()]/g, '');
     if (/^\+?\d+$/.test(cleanedUrl)) return `tel:${cleanedUrl}`;
     if (!url.startsWith('http://') && !url.startsWith('https://') && !url.startsWith('/')) return `https://${url}`;
     return url;
+  };
+
+  // Helper pour déterminer si on doit utiliser Link ou <a>
+  const shouldUseLink = (url: string): boolean => {
+    return url.startsWith('http://') || url.startsWith('https://') || url.startsWith('/') || url === '#';
   };
 
   return (
@@ -63,16 +75,31 @@ export const Contact: React.FC<ContactProps> = ({ data, tinaFieldBase, id }) => 
               const href = getContactHref(link.linkUrl);
               const text = link.linkText || link.linkUrl || 'Lien';
               const itemTinaField = tinaFieldBase ? `${tinaFieldBase}.links.${index}.linkUrl` : undefined;
-              return (
-                <Link
-                  key={index}
-                  href={href}
-                  className="contact-link"
-                  data-tina-field={itemTinaField}
-                >
-                  {text}
-                </Link>
-              );
+              
+              // Utiliser Link pour les URLs normales, <a> pour tel: et mailto:
+              if (shouldUseLink(href)) {
+                return (
+                  <Link
+                    key={index}
+                    href={href}
+                    className="contact-link"
+                    data-tina-field={itemTinaField}
+                  >
+                    {text}
+                  </Link>
+                );
+              } else {
+                return (
+                  <a
+                    key={index}
+                    href={href}
+                    className="contact-link"
+                    data-tina-field={itemTinaField}
+                  >
+                    {text}
+                  </a>
+                );
+              }
             })}
         </div>
       )}
@@ -84,6 +111,12 @@ export const contactBlocks: Template = {
     name: "contactLinks",
     label: "Section Contact",
     fields: [
+      {
+        name: "id",
+        label: "ID de la section",
+        type: "string",
+        description: "ID utilisé pour les liens internes (ex: contact)"
+      },
       {
         name: "contactTitle",
         label: "Titre de la section Contact",

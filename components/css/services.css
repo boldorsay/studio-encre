@@ -37,9 +37,9 @@
     border-top: 0.13rem solid #000000;
 }
 
-/* Appliquer une marge négative plus importante pour le chevauchement */
+/* Appliquer une marge négative équilibrée pour le chevauchement */
 .service-card:not(:first-child) {
-    margin-top: -6rem;
+    margin-top: -4rem;
 }
 
 .service-image {
@@ -67,7 +67,7 @@
 .service-content {
     flex: 50%;
     padding: 6rem 1rem 10rem 10vw;
-    /* Ajusté pour compenser le chevauchement */
+    /* Padding symétrique pour un centrage visuel */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -88,8 +88,8 @@
 }
 
 .service-card:first-child .service-content {
-    padding-top: 1rem;
-    /* Premier élément n'a pas besoin de padding supplémentaire en haut */
+    padding-top: 3rem;
+    /* Premier élément avec padding réduit mais symétrique */
 }
 
 .service-card h2 {
@@ -132,8 +132,8 @@
 
 /* Ajuster le padding bottom du service-card avant le dernier */
 .service-card:nth-last-child(2) .service-content {
-    padding-bottom: 6rem;
-    /* Réduit le padding du dernier élément visible */
+    padding-bottom: 10rem;
+    /* Padding symétrique pour le dernier élément visible */
 }
 
 @media (max-width: 768px) {

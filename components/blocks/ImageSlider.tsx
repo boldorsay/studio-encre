@@ -84,12 +84,12 @@ export default function ImageSlider({ images, title, client, description, date }
             {/* Bouton Credits */}
             <div className="credits-button-container">
                 <button className="credits-button" onClick={toggleCredits}>
-                    [CREDITS]
+                    [CRÉDITS]
                 </button>
             </div>
 
             {/* Bouton Back */}
-            <div className="back-button" onClick={handleBack}>BACK</div>
+            <div className="back-button" onClick={handleBack}>RETOUR</div>
 
             {/* Zone de navigation gauche */}
             <div

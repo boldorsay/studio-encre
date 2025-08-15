@@ -13,7 +13,7 @@
 }
 
 .contact-description {
-    font-size: var(--font-size-large);
+    font-size: var(--font-size-medium);
     line-height: 1.3;
     color: rgb(23, 25, 27);
     margin-bottom: 2.5rem;

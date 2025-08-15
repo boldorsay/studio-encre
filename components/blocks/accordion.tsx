@@ -58,7 +58,7 @@ type AccordionProps = {
 }
 
 export const Accordion = ({ data }: AccordionProps) => {
-    const [openIndex, setOpenIndex] = useState<number | null>(0);
+    const [openIndex, setOpenIndex] = useState<number | null>(null);
     const svgRef = useRef<SVGSVGElement>(null);
 
     // Extraire les données du bloc
@@ -81,7 +81,7 @@ export const Accordion = ({ data }: AccordionProps) => {
         // Animation du rouleur
         const movingElement = document.querySelector('#Layer_21 path.st0');
         if (movingElement) {
-            const positions = [-80, 40, 160]; // Positions pour les 3 accordéons
+            const positions = [-180, -80,   60]; // Positions pour les 3 accordéons
             const position = positions[index] || 0;
             (movingElement as SVGElement).style.transform = `translateY(${position}px)`;
         }
