@@ -204,7 +204,7 @@ export default function ThreeScene() {
       const loader = new GLTFLoader();
       const loadPromise = new Promise((resolve, reject) => {
         loader.load(
-          '/models/drop5.glb',
+          '/models/lentille.glb',
           (gltf) => {
             gltf.scene.traverse((child) => {
               if (child instanceof THREE.Mesh) {
