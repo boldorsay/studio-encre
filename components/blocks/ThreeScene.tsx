@@ -196,15 +196,15 @@ export default function ThreeScene() {
       const glassMaterial = new THREE.MeshPhysicalMaterial({
         transmission: 1.0,
         roughness: 0.0,
-        thickness: 0.2,
-        ior: 1.2,
+        thickness: 2.3,
+        ior: 1.3,
         side: THREE.DoubleSide,
       });
 
       const loader = new GLTFLoader();
       const loadPromise = new Promise((resolve, reject) => {
         loader.load(
-          '/models/lentille.glb',
+          '/models/encrier2.glb',
           (gltf) => {
             gltf.scene.traverse((child) => {
               if (child instanceof THREE.Mesh) {
@@ -217,7 +217,7 @@ export default function ThreeScene() {
               }
             });
 
-            gltf.scene.scale.set(0.25, 0.25, 0.25);
+            gltf.scene.scale.set(0.15, 0.15, 0.15);
             gltf.scene.rotation.y = Math.PI / 2;
             scene.add(gltf.scene);
             dropeModelRef.current = gltf.scene;
@@ -361,8 +361,8 @@ export default function ThreeScene() {
       if (dropeModelRef.current) {
         dropeModelRef.current.position.x = mouse.x * 0.5;
         dropeModelRef.current.position.y = mouse.y * 0.5;
-        // dropeModelRef.current.rotation.x += 0.01;
-        dropeModelRef.current.rotation.y += 0.01;
+        dropeModelRef.current.rotation.x += 0.015;
+        dropeModelRef.current.rotation.y += 0.015;
       }
 
       controls.update();
@@ -460,3 +460,5 @@ export const threeSceneBlock: Template = {
     }
   ],
 };
+
+
